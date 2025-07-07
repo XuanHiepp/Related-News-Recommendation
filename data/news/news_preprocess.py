@@ -143,7 +143,7 @@ def transform(input_file, output_file):
 def get_word2vec_model():
     if not os.path.exists('word_embeddings_' + str(WORD_EMBEDDING_DIM) + '.model'):
         print('- training word2vec model...')
-        w2v_model = gensim.models.Word2Vec(corpus, size=WORD_EMBEDDING_DIM, min_count=1, workers=16)
+        w2v_model = gensim.models.Word2Vec(corpus, vector_size=WORD_EMBEDDING_DIM, min_count=1, workers=16)
         print('- saving model ...')
         w2v_model.save('word_embeddings_' + str(WORD_EMBEDDING_DIM) + '.model')
     else:
@@ -167,7 +167,7 @@ if __name__ == '__main__':
     embeddings = np.zeros([len(word2index) + 1, WORD_EMBEDDING_DIM])
     model = get_word2vec_model()
     for index, word in enumerate(word2index.keys()):
-        embedding = model[word] if word in model.wv.vocab else np.zeros(WORD_EMBEDDING_DIM)
+        embedding = model.wv[word] if word in model.wv.key_to_index else np.zeros(WORD_EMBEDDING_DIM)
         embeddings[index + 1] = embedding
     print('- writing word embeddings ...')
     np.save(('word_embeddings_' + str(WORD_EMBEDDING_DIM)), embeddings)
