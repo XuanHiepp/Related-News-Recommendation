@@ -1,4 +1,4 @@
-# DKN
+# Deep Knowledge-aware Network (DKN)
 
 This repository is the implementation of [DKN](https://dl.acm.org/citation.cfm?id=3186175) ([arXiv](https://arxiv.org/abs/1801.08284)):
 > DKN: Deep Knowledge-Aware Network for News Recommendation  
